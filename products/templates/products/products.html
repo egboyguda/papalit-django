@@ -1,54 +1,55 @@
-{% extends 'base.html'%} {% block content%}
-<div class="grid grid-cols-5 gap-2 mt-4">
-  <div class="">
-    <div
-      class="text-sm font-mono p-2 bg-slate-500 text-slate-200 rounded-t-md font-semibold border-2"
-    >
-      Categories
-    </div>
-    <div class="divide-y-2 divide-slate-200 px-2 flex flex-col bg-white">
-      {%for category in categorys%}
-      <a href="" class="p-2 text-slate-700">{{category.name.title}}</a>
-      {%endfor%}
-    </div>
-  </div>
-  <div class="col-span-4">
-    <div>
+{% extends 'base.html'%} {% load static %} {% block content%}
+<div class="container mx-auto">
+  <img
+    src="{% static 'images/banner.jpg'%}"
+    alt=""
+    srcset=""
+    class="rounded-md mt-4"
+  />
+  <div class="grid grid-cols-5 gap-2 mt-4">
+    <div class="">
       <div
-        class="rounded-t-lg text-sm font-mono font-bold bg-slate-500 text-slate-200 w-fit"
+        class="text-sm font-mono p-2 bg-slate-500 text-slate-200 rounded-t-md font-semibold border-2"
       >
-        <div class="p-2">Products</div>
+        Categories
       </div>
-      <hr />
+      <div class="divide-y-2 divide-slate-200 px-2 flex flex-col bg-white">
+        {%for category in categorys%}
+        <a href="" class="p-2 text-slate-700">{{category.name.title}}</a>
+        {%endfor%}
+      </div>
     </div>
-    <div class="mt-2 ml-2 grid grid-cols-4 gap-2">
-      {%for product in products%}
-      <div class="border shadow-md rounded-xl space-y-4 p-2 hover:shadow-xl">
-        <img
-          src="{{product.image.url}}"
-          class="object-contain rounded-xl"
-          alt=""
-          srcset=""
-        />
-        <div>
-          <div
-            class="font-mono font-medium tracking-wide text-md text-slate-700"
-          >
-            {{product.name.title}}
-          </div>
-          <div class="flex flex-row items-center justify-between">
-            <p class="text-yellow-500 text-2xl font-semibold">
-              ₱{{product.price}}
-            </p>
-            <i
-              class="fa-solid text-xl text-slate-700 hover:text-yellow-400 fa-cart-shopping fa-flip-horizontal"
-            ></i>
-          </div>
+    <div class="col-span-4">
+      <div>
+        <div
+          class="rounded-t-lg text-sm font-mono font-bold bg-slate-500 text-slate-200 w-fit"
+        >
+          <div class="p-2">Products</div>
         </div>
+        <hr />
       </div>
-      {%endfor%}
+      <div class="mt-2 ml-2 grid grid-cols-4 gap-2">
+        {%for product in products%}
+        <a href="{%url 'product' product.id %}">
+          <div class="card w-fit bg-base-100 shadow-xl">
+            <figure>
+              <img src="{{product.image.url}}" alt="Shoes" />
+            </figure>
+            <div class="card-body">
+              <h2 class="card-title">
+                {{product.name.title}}
+                <div class="badge badge-secondary">NEW</div>
+              </h2>
+              <p>If a dog chews shoes whose shoes does he choose?</p>
+              <div class="card-actions justify-end">
+                <div class="badge badge-outline bg-primary">Add to Cart</div>
+              </div>
+            </div>
+          </div>
+        </a>
+        {%endfor%}
+      </div>
     </div>
   </div>
 </div>
-
 {% endblock content%}

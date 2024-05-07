@@ -24,15 +24,6 @@
 
   <body class="bg-gray-50 leading-normal tracking-normal font-sans">
     {% include 'navbar.html'%}
-    <div class="container mx-auto">
-      <img
-        src="{% static 'images/banner.jpg'%}"
-        alt=""
-        srcset=""
-        class="rounded-md mt-4"
-      />
-
-      {% block content %} {%endblock content%}
-    </div>
+    <div class="">{% block content %} {%endblock content%}</div>
   </body>
 </html>

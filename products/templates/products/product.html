@@ -1,0 +1,38 @@
+{%extends 'base.html'%} {%block content%}
+
+<div class="container mx-auto">
+  <div class="text-sm breadcrumbs">
+    <ul class="tracking-wide font-mono text-slate-500">
+      <li>{{product.category}}</li>
+      <li>{{product.name}}</li>
+    </ul>
+  </div>
+</div>
+<div class="bg-white mt-2">
+  <div class="container mx-auto grid w-full grid-cols-4">
+    <img
+      src="{{product.image.url}}"
+      class="col-span-1 w-full mx-auto"
+      alt=""
+      srcset=""
+    />
+    <div class="col-span-3 mt-4 flex flex-col justify-between">
+      <h1 class="font-mono text-4xl font-semibold">{{product.name.title}}</h1>
+      <div>
+        <p class="max-w-xl">
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia,
+          dolorum sint repellendus exercitationem officiis autem dignissimos
+          error dolore? Autem illo quo optio reprehenderit quisquam facilis
+          provident maxime. Saepe, esse laboriosam?
+        </p>
+      </div>
+      <div class="space-x-4">
+        <button class="btn btn-lg btn-secondary">Buy Now!</button>
+        <button class="btn btn-lg btn-outline btn-secondary">
+          Add to Cart
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+{%endblock%}
