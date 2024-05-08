@@ -28,11 +28,36 @@
       </div>
       <div class="space-x-4">
         <button class="btn btn-lg btn-secondary">Buy Now!</button>
-        <button class="btn btn-lg btn-outline btn-secondary">
+        <button
+          id="addCart"
+          value="{{product.id}}"
+          class="btn btn-lg btn-outline btn-secondary"
+        >
           Add to Cart
         </button>
       </div>
     </div>
   </div>
 </div>
+<script>
+  $(document).on("click", "#addCart", function (e) {
+    e.preventDefault();
+    var data = {
+      productId: $("#addCart").val(),
+      action: "add",
+    };
+
+    $.ajax({
+      type: "POST",
+      url: "{% url 'addCart' %}",
+      headers: { "X-CSRFToken": "{{csrf_token}}" }, // Add CSRF token to headers
+      data: JSON.stringify(data),
+      success: function (json) {
+        console.log(json);
+      },
+      error: function (xhr, errmsg, err) {},
+    });
+  });
+</script>
+
 {%endblock%}
