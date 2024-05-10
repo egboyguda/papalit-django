@@ -36,10 +36,18 @@ def addCart(request):
     orderItem,created = OrderItem.objects.get_or_create(product=product,order=order)
    
     if(action == "add"):
-        orderItem.quantity=orderItem.quantity+1
+        orderItem.quantity=orderItem.quantity+1 # type: ignore
     orderItem.save()
 # Serialize the order item to a dictionary
     order_item_data = serializers.serialize('python', [orderItem])[0]['fields']
 
 # Return the serialized order item data as JSON response
     return JsonResponse({'orderItem': order_item_data},safe=False)
+
+def showCart(request):
+    user = request.user
+    order = Order.objects.get(customer =user)
+    orderItem = order.orderitem_set.all() # type: ignore
+    
+    context = {'orderItem':orderItem,'total':order.get_cart_total}
+    return render(request,'products/cart.html',context)

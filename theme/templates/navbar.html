@@ -40,8 +40,13 @@
           <p class="text-xs font-semibold tracking-wide">Alert</p>
         </div>
         <div class="flex flex-col items-center justify-center text-slate-700">
-          <i class="fa-solid fa-basket-shopping text-2xl"></i>
-          <p class="text-xs font-semibold tracking-wide">Basket</p>
+          <a
+            href="{% url 'cart' %}"
+            class="flex flex-col items-center justify-center text-slate-700"
+          >
+            <i class="fa-solid fa-basket-shopping text-2xl"></i>
+            <p class="text-xs font-semibold tracking-wide">Basket</p>
+          </a>
         </div>
       </div>
     </div>
