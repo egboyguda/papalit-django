@@ -46,8 +46,18 @@ def addCart(request):
 
 def showCart(request):
     user = request.user
-    order = Order.objects.get(customer =user)
-    orderItem = order.orderitem_set.all() # type: ignore
+    try:
+        order = Order.objects.get(customer =user,complete=False)
+        orderItem = order.orderitem_set.all() # type: ignore
+        context = {'orderItem':orderItem,'total':order.get_cart_total}
+    except Order.DoesNotExist:
+        context={}
+        
+        
+
+        
+        
     
-    context = {'orderItem':orderItem,'total':order.get_cart_total}
+    
+    
     return render(request,'products/cart.html',context)

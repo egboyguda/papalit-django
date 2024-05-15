@@ -2,29 +2,39 @@
 <div class="container mx-auto mt-4 font-mono">
   <div class="grid gap-4 grid-cols-6">
     <div class="col-span-4 h-fit p-4 divide-y-2 bg-white">
-      {%for item in orderItem%}
-      <div class="grid grid-cols-6 p-2">
-        <div class="col-span-4 flex items-center">
-          <img
-            src="{{item.product.image.url }}"
-            class="w-24"
-            alt=""
-            srcset=""
-          />
-          <h1 class="text-lg font-medium tracking-wide">
-            {{item.product.name.title}}
-          </h1>
-        </div>
-        <div class="flex items-center font-bold text-xl text-secondary">
-          &#8369; {{item.get_total}}
-        </div>
-        <div class="flex flex-col justify-center items-center">
-          <h1 class="text-slate-400 font-semibold">Qty</h1>
-          <p class="font-bold text-lg">{{item.quantity}}</p>
-        </div>
+      <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Product</th>
+              <th>Price</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody class="font-mono">
+            {%for item in orderItem%}
+            <!-- row 1 -->
+            <tr>
+              <th>
+                <img
+                  src="{{item.product.image.url}}"
+                  class="w-24"
+                  alt=""
+                  srcset=""
+                />
+              </th>
+              <td>{{item.product.name.title}}</td>
+              <td>&#8369; {{item.product.price}}</td>
+              <td>{{item.quantity}}</td>
+              <td>&#8369; {{item.get_total}}</td>
+            </tr>
+            {%endfor%}
+          </tbody>
+        </table>
       </div>
-
-      {%endfor%}
     </div>
     <div class="bg-white col-span-2 p-6 space-y-4">
       <div class="space-y-2">
