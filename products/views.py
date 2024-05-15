@@ -53,11 +53,4 @@ def showCart(request):
     except Order.DoesNotExist:
         context={}
         
-        
-
-        
-        
-    
-    
-    
     return render(request,'products/cart.html',context)
