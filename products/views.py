@@ -1,6 +1,7 @@
 import json
 from django.http import JsonResponse
 from django.core import serializers
+from django.contrib import messages
 from django.shortcuts import render
 from .models import Category,Product,OrderItem,Order
 # Create your views here.
@@ -38,6 +39,7 @@ def addCart(request):
     if(action == "add"):
         orderItem.quantity=orderItem.quantity+1 # type: ignore
     orderItem.save()
+    messages.success(request,'added to cart')
 # Serialize the order item to a dictionary
     order_item_data = serializers.serialize('python', [orderItem])[0]['fields']
 
