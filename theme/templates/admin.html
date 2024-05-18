@@ -28,44 +28,25 @@
     {% tailwind_css %}
   </head>
 
-  <body
-    class="bg-gray-50 leading-normal tracking-normal font-sans flex flex-col min-h-screen"
-  >
-    {% include 'navbar.html'%} {% if messages %} {% for message in messages %}
-    <div class="toast toast-end z-10">
-      <div
-        class="alert alert-{{message.tags}} flex justify-between items-center"
-      >
-        <span>{{message}}</span>
-        <button
-          type="button"
-          class="text-red-500 hover:text-red-700"
-          onclick="closeToast(this)"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="h-6 w-6"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
-              d="M6 18L18 6M6 6l12 12"
-            />
-          </svg>
-        </button>
+  <body class="bg-gray-50 leading-normal tracking-normal font-sans">
+    <div class="drawer lg:drawer-open">
+      <input id="my-drawer-2" type="checkbox" class="drawer-toggle" />
+      <div class="drawer-content">
+        <!-- Page content here -->
+        {% include 'admin-nav.html'%} {% block content %} {%endblock%}
+      </div>
+      <div class="drawer-side">
+        <label
+          for="my-drawer-2"
+          aria-label="close sidebar"
+          class="drawer-overlay"
+        ></label>
+        <ul class="menu p-4 w-80 min-h-full bg-base-200 text-base-content">
+          <!-- Sidebar content here -->
+          <li><a>Sidebar Item 1</a></li>
+          <li><a>Sidebar Item 2</a></li>
+        </ul>
       </div>
     </div>
-    {% endfor %} {% endif %}
-    <div class="flex-grow">{% block content %} {%endblock content%}</div>
-    {%include 'footer.html'%}
-    <script>
-      function closeToast(button) {
-        button.closest(".toast").remove(); // Remove the closest parent toast element
-      }
-    </script>
   </body>
 </html>

@@ -38,13 +38,6 @@
     </div>
     <div class="bg-white col-span-2 p-6 space-y-4">
       <div class="space-y-2">
-        <p class="text-slate-400 font-semibold">Location</p>
-        <p class="text-xs">
-          <i class="fa-solid fa-location-dot text-slate-400 pr-2"></i> San Roque
-          N. Samar
-        </p>
-      </div>
-      <div class="space-y-2">
         <h1 class="font-bold tracking-wide text-xl">Order Summary</h1>
         <div class="flex justify-between">
           <p class="text-slate-400">Subtotal</p>
@@ -66,7 +59,9 @@
           <p>&#8369; {{total}}</p>
         </div>
         <div class="items-center justify-center flex">
-          <button class="btn btn-primary w-full">PROCEED TO CHECKOUT</button>
+          <a href="{%url 'confirmPage'%}" class="btn btn-primary w-full"
+            >PROCEED TO CHECKOUT</a
+          >
         </div>
       </div>
     </div>

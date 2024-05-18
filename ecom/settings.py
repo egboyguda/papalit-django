@@ -41,7 +41,8 @@ INSTALLED_APPS = [
     'theme',
     'django_browser_reload',
     'products.apps.ProductsConfig',
-    'users.apps.UsersConfig'
+    'users.apps.UsersConfig',
+    'seller.apps.SellerConfig',
 ]
 TAILWIND_APP_NAME = 'theme'
 INTERNAL_IPS = [

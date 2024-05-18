@@ -4,6 +4,7 @@ from django.core import serializers
 from django.contrib import messages
 from django.shortcuts import render
 from .models import Category,Product,OrderItem,Order
+from .place import provinces,cities
 # Create your views here.
 
 def products(request):
@@ -56,3 +57,17 @@ def showCart(request):
         context={}
         
     return render(request,'products/cart.html',context)
+
+def address(request):
+    user = request.user
+    mun =cities("0848")
+ 
+    try:
+        order = Order.objects.get(customer =user,complete=False)
+        orderItem = order.orderitem_set.all() # type: ignore
+        context = {'orderItem':orderItem,'total':order.get_cart_total,'mun':mun}
+    except Order.DoesNotExist:
+        context ={'mun':mun}
+    
+    
+    return render(request, 'products/address.html',context)
