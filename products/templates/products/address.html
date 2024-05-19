@@ -2,26 +2,64 @@
 
 <div class="mx-auto container mt-4">
   <div class="grid grid-cols-2 gap-6">
-    <div class="bg-white p-4 flex justify-evenly flex-col gap-4">
-      <select class="select select-bordered w-full mt-4 max-w-xs">
-        <option disabled selected>Select Municipality?</option>
-        {%for m in mun%}
-        <option>{{m.city_name}}</option>
-        {%endfor%}
-      </select>
-      <textarea
-        class="textarea textarea-bordered"
-        placeholder="Detailed Address"
-      ></textarea>
-      <button class="btn">Continue</button>
+    <div
+      class="bg-white p-4 flex justify-evenly flex-col gap-4 border rounded-lg"
+    >
+      <form action="" method="POST">
+        {%csrf_token%}
+        <select name="mun" class="select select-bordered w-full mt-4 max-w-xs">
+          <option disabled selected>Select Municipality?</option>
+          {%for m in mun%}
+          <option value="{{m.city_name}}">{{m.city_name}}</option>
+          {%endfor%}
+        </select>
+        <textarea
+          class="textarea textarea-bordered"
+          placeholder="Detailed Address (Zone/Brgy/Street)"
+          name="address"
+        ></textarea>
+        <button class="btn btn-primary" type="submit">Continue</button>
+      </form>
     </div>
-    <div class="bg-white rounded-lg">
-      {%for item in orderItem%}
-      <img src="{{item.product.image.url}}" class="w-20" alt="" srcset="" />
-      <p>{{item.product.name}}</p>
-      <p>{{item.quantity}}</p>
-      <p>&#8369; {{item.get_total}}</p>
-      {%endfor%}
+
+    <div class="bg-white rounded-lg border">
+      <div class="overflow-x-auto">
+        <table class="table">
+          <!-- head -->
+          <thead>
+            <tr>
+              <th></th>
+              <th>Name</th>
+              <th>Quantity</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- row 1 -->
+            {%for item in orderItem%}
+            <tr>
+              <th>
+                <img
+                  src="{{item.product.image.url}}"
+                  class="w-20"
+                  alt=""
+                  srcset=""
+                />
+              </th>
+              <td>{{item.product.name.title}}</td>
+              <td>{{item.quantity}}</td>
+              <td>&#8369; {{item.get_total}}</td>
+            </tr>
+            {%endfor%}
+            <tr>
+              <td class="font-semibold text-xl">Total</td>
+              <td></td>
+              <td></td>
+              <td class="font-semibold text-lg">&#8369; {{total}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>

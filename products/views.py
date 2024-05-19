@@ -3,8 +3,9 @@ from django.http import JsonResponse
 from django.core import serializers
 from django.contrib import messages
 from django.shortcuts import render
-from .models import Category,Product,OrderItem,Order
+from .models import Category,Product,OrderItem,Order,ShippingAddress
 from .place import provinces,cities
+from .form import ShippingForm
 # Create your views here.
 
 def products(request):
@@ -69,5 +70,19 @@ def address(request):
     except Order.DoesNotExist:
         context ={'mun':mun}
     
+    
+    if request.method == 'POST':
+        order,created = Order.objects.get_or_create(customer = request.user,complete=False)
+        
+        form = ShippingForm(request.POST)
+        if form.is_valid():
+            order.complete =True
+            address = form.save(commit=False)
+            address.customer = request.user
+            address.order = order
+            address.save()
+            messages.success(request,'Your order is Process')
+            
+            
     
     return render(request, 'products/address.html',context)
